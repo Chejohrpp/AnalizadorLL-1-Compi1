@@ -47,6 +47,10 @@ public AnalizadorDescendente(LexerSuma lexerSuma) {
             this.lexerSuma = lexerSuma;
             avanzar();
             E();
+            if (noError) {
+                    System.out.println("cadena aceptada");
+            }
+            
     }
 
 private void   E() {
@@ -57,9 +61,7 @@ private void   E() {
                     default:
                             error(token);
             }
-            if (noError) {
-                    System.out.println("cadena aceptada");
-            }
+            
     }
 
  private void Ep() {
@@ -114,13 +116,34 @@ private void   E() {
             }
     }
     
-    private void error(int token){
-        System.out.println("Error en el index token: " + token);
+    private void error(int token){        
+        System.out.println("Error en el token: " + nombreToken(token));
         noError = false;
     }       
     private void error(int tok, int token){
-        System.out.println("El token " + token + "no era el esperado. Token esperado: " + tok);
+        System.out.println("El token " + nombreToken(token) + " no era el esperado. Token esperado: " + nombreToken(tok));
         noError = false;
+    }
+    
+    private String nombreToken(int token){
+        switch(token){
+            case 0:
+                return "FIN DE CADENA";
+            case 1:
+                return "ID";
+            case 2: 
+                return "";
+            case 3:
+                return "PARENTESIS ABIERTO";
+            case 4:
+                return "PARENTESIS CERRADO";
+            case 5:
+                return "SUMA";
+            case 6:
+                return "POR";
+            default:
+                return "";
+        }
     }
     
 }
